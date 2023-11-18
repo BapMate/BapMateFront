@@ -21,15 +21,15 @@ const CommonButton = ({
   return (
     <div>
       {isFull && (
-        <FullButWrapper buttonColor={color} textColor={textColor}>
+        <FullButWrapper
+          buttonColor={color}
+          textColor={textColor}
+          onClick={onClick}
+        >
           {text}
         </FullButWrapper>
       )}
-      {!isFull && (
-        <TransparentButWrapper buttonColor={color}>
-          {text}
-        </TransparentButWrapper>
-      )}
+      {!isFull && <TransparentButWrapper>{text}</TransparentButWrapper>}
     </div>
   );
 };
@@ -53,6 +53,8 @@ const FullButWrapper = styled.button<{
   color: ${(props) => props.theme.colors[props.textColor]};
   background-color: ${(props) => props.theme.colors[props.buttonColor]};
   border: none;
+
+  cursor: pointer;
 `;
 const TransparentButWrapper = styled.div``;
 
