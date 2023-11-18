@@ -11,6 +11,7 @@ const Landing = () => {
       <CommonButton
         onClick={moveToKakaoLogin}
         color="kakao"
+        textColor="black"
         text="카카오로그인"
       />
     </div>

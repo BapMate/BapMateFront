@@ -5,6 +5,7 @@ interface ButtonProps {
   size?: 'l' | 'm' | 's';
   onClick: () => void;
   color: 'key' | 'sub' | 'gray' | 'kakao';
+  textColor: 'key' | 'sub' | 'gray' | 'kakao' | 'black' | 'white';
   isFull?: boolean;
   text: string;
 }
@@ -13,12 +14,17 @@ const CommonButton = ({
   size = 'l',
   onClick,
   color,
+  textColor,
   isFull = true,
   text,
 }: ButtonProps) => {
   return (
     <div>
-      {isFull && <FullButWrapper buttonColor={color}>{text}</FullButWrapper>}
+      {isFull && (
+        <FullButWrapper buttonColor={color} textColor={textColor}>
+          {text}
+        </FullButWrapper>
+      )}
       {!isFull && (
         <TransparentButWrapper buttonColor={color}>
           {text}
@@ -28,7 +34,10 @@ const CommonButton = ({
   );
 };
 
-const FullButWrapper = styled.div<{ buttonColor: string }>`
+const FullButWrapper = styled.button<{
+  buttonColor: string;
+  textColor: string;
+}>`
   width: 21.875rem;
   height: 3rem;
   border-radius: 2.5rem;
@@ -41,20 +50,10 @@ const FullButWrapper = styled.div<{ buttonColor: string }>`
   font-size: 1.125rem;
   font-weight: 700;
 
-  color: ${(props) => props.theme.colors.white};
+  color: ${(props) => props.theme.colors[props.textColor]};
   background-color: ${(props) => props.theme.colors[props.buttonColor]};
+  border: none;
 `;
-const TransparentButWrapper = styled.div<{ buttonColor: string }>`
-  width: 21.875rem;
-  height: 3rem;
-  border-radius: 2.5rem;
-
-  font-family: Pretendard;
-  font-size: 1.125rem;
-  font-weight: 700;
-
-  color: ${(props) => props.theme.colors[props.buttonColor]};
-  border: 1px solid ${(props) => props.theme.colors[props.buttonColor]};
-`;
+const TransparentButWrapper = styled.div``;
 
 export default CommonButton;
