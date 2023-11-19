@@ -7,6 +7,7 @@ const Landing = () => {
     window.location.href =
       'https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=a0494a600b8fdb5783112c6329077f60&redirect_uri=http://localhost:3000/kakao/redirect';
   };
+
   return (
     <div>
       <CommonButton
