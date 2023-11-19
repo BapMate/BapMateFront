@@ -7,7 +7,7 @@ import axiosInstance from '..';
  * @param 카카오 코드
  * @returns id Token
  */
-export const getIdToken = (code: string | null) => {
+export const useGetIdToken = (code: string | null) => {
   const logintype = 'kakao';
 
   const { isLoading, data, error } = useQuery({
