@@ -39,6 +39,7 @@ const KakaoLogin = () => {
         setRefreshToken(fetchAccessData.data.data.refreshToken);
       } else {
         //회원가입 안된 사용자
+        alert('회원가입이 필요해요!');
       }
     }
   }, [fetchAccessData.isSuccess]);
