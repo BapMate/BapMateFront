@@ -15,6 +15,9 @@ const KakaoLogin = () => {
 
   //code 백으로 보내고 idToken 받아오기
   const fetchData = useGetIdToken(code);
+  //idToken 백으로 보내고 accessToken받아오기
+  const fetchAccessData = usePostIdToken(idToken);
+  const getAccessToken = fetchAccessData.accessToken;
 
   useEffect(() => {
     console.log('dataFetching...');
@@ -24,9 +27,20 @@ const KakaoLogin = () => {
   }, [fetchData]);
 
   useEffect(() => {
-    console.log('idToken발견!');
-    console.log(idToken);
+    if (idToken !== '') {
+      console.log('idToken발견!');
+      console.log(idToken);
+      fetchAccessData.accessToken();
+      console.log(fetchAccessData.data);
+    }
   }, [idToken]);
+
+  useEffect(() => {
+    console.log('fetchAccessData...');
+    //console.log(getAccessToken());
+    //fetchAccessData.accessToken(); //accessToken을 받아옴
+    //console.log(fetchAccessData.data);
+  }, [fetchAccessData]);
 
   return <div>Loading...</div>;
 };

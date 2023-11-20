@@ -10,11 +10,17 @@ import axiosInstance from '..';
 export const usePostIdToken = (idToken: string | null) => {
   const logintype = 'kakao';
 
-  const { mutate, data, error, isSuccess } = useMutation({
+  const {
+    mutate,
+    data = '',
+    isPending,
+    error,
+    isSuccess,
+  } = useMutation({
     mutationKey: ['accessToken'],
     mutationFn: async (data) => {
       const res = await axiosInstance.post(
-        `/v1/auth/${logintype}/idtoken?idtoken=${idToken}`,
+        `/v1/auth/${logintype}/login?idtoken=${idToken}`,
         data,
       );
       return res.data;
@@ -23,6 +29,7 @@ export const usePostIdToken = (idToken: string | null) => {
 
   return {
     accessToken: mutate,
+    isPending,
     isSuccess,
     error,
     data,
