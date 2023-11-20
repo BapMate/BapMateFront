@@ -7,11 +7,13 @@ import { useGetIdToken } from '../apis/get/useGetIdToken';
 import { usePostIdToken } from '../apis/post/usePostIdToken';
 
 const KakaoLogin = () => {
-  //path에서 query string 받아오기
   const [searchParams, setSearchParams] = useSearchParams();
-  //const code = searchParams.get('code');
+  const navigate = useNavigate();
+
   const [code, setCode] = useState(searchParams.get('code'));
   const [idToken, setIdToken] = useState('');
+  const [accessToken, setAccessToken] = useState('');
+  const [refreshToken, setRefreshToken] = useState('');
 
   const fetchData = useGetIdToken(code);
   const fetchAccessData = usePostIdToken(idToken);
@@ -30,9 +32,26 @@ const KakaoLogin = () => {
 
   useEffect(() => {
     if (fetchAccessData.isSuccess) {
-      console.log(fetchAccessData.data);
+      const isRegistered = fetchAccessData.data.data.isRegistered;
+      if (isRegistered) {
+        //회원가입된 사용자
+        setAccessToken(fetchAccessData.data.data.accessToken);
+        setRefreshToken(fetchAccessData.data.data.refreshToken);
+      } else {
+        //회원가입 안된 사용자
+      }
     }
   }, [fetchAccessData.isSuccess]);
+
+  useEffect(() => {
+    if (accessToken !== '' && refreshToken !== '') {
+      //로컬스토리지 저장
+      localStorage.setItem('acessToken', accessToken);
+      localStorage.setItem('refreshToken', refreshToken);
+      alert('로그인 성공!');
+      navigate('/main');
+    }
+  }, [accessToken, refreshToken]);
 
   return <div>Loading...</div>;
 };
