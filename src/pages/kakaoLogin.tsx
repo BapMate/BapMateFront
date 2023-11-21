@@ -21,6 +21,7 @@ const KakaoLogin = () => {
   useEffect(() => {
     if (fetchData.idToken !== null) {
       setIdToken(fetchData.idToken.data.idToken);
+      localStorage.setItem('idToken', idToken);
     }
   }, [fetchData]);
 
@@ -40,6 +41,7 @@ const KakaoLogin = () => {
       } else {
         //회원가입 안된 사용자
         alert('회원가입이 필요해요!');
+        navigate('/signup');
       }
     }
   }, [fetchAccessData.isSuccess]);
