@@ -7,6 +7,7 @@ import KakaoLogin from './pages/kakaoLogin';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import Main from './pages/main';
 import Signup from './pages/signup';
+import CalenderTest from './pages/calendertest';
 
 function App() {
   const queryClient = new QueryClient();
@@ -19,6 +20,7 @@ function App() {
             <Route path="/kakao/redirect" element={<KakaoLogin />} />
             <Route path="/main" element={<Main />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/calendertest" element={<CalenderTest />} />
           </Routes>
         </BrowserRouter>
       </QueryClientProvider>

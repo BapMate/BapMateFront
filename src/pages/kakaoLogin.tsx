@@ -1,6 +1,6 @@
 import React from 'react';
 import CommonButton from '../components/common/button';
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSearchParams } from 'react-router-dom';
 import { useGetIdToken } from '../apis/get/useGetIdToken';
