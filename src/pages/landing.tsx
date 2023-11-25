@@ -2,17 +2,25 @@ import React from 'react';
 import CommonButton from '../components/common/button';
 import { ReactComponent as Logo } from '../assets/bapMateLogo.svg';
 import styled from 'styled-components';
+import { useGetHostingMeetup } from '../apis/get/useGetHostingMeetup';
 
 const Landing = () => {
+  const fetchData = useGetHostingMeetup();
+
   const moveToKakaoLogin = () => {
     window.location.href =
       'https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=a0494a600b8fdb5783112c6329077f60&redirect_uri=http://localhost:3000/kakao/redirect';
+  };
+
+  const test = () => {
+    console.log(fetchData);
   };
 
   return (
     <Wrapper>
       <InnerWrapper>
         <Logo />
+        <button onClick={test}>API테스팅용</button>
         <CommonButton
           onClick={moveToKakaoLogin}
           color="kakao"

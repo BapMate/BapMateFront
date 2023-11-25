@@ -16,7 +16,7 @@ export const useGetIdToken = (code: string | null) => {
       const res = await axiosInstance.get(
         `/v1/auth/${logintype}/idtoken?code=${code}`,
       );
-      return res.data.idToken;
+      return res.data;
     },
   });
 
