@@ -49,7 +49,7 @@ const KakaoLogin = () => {
   useEffect(() => {
     if (accessToken !== '' && refreshToken !== '') {
       //로컬스토리지 저장
-      localStorage.setItem('acessToken', accessToken);
+      localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('refreshToken', refreshToken);
       alert('로그인 성공!');
       navigate('/main');
