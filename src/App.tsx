@@ -8,6 +8,7 @@ import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import Main from './pages/main';
 import Signup from './pages/signup';
 import CalenderTest from './pages/calendertest';
+import UploadPostPage from './pages/uploadpost';
 
 function App() {
   const queryClient = new QueryClient();
@@ -21,6 +22,7 @@ function App() {
             <Route path="/main" element={<Main />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/calendertest" element={<CalenderTest />} />
+            <Route path="/meetup" element={<UploadPostPage />} />
           </Routes>
         </BrowserRouter>
       </QueryClientProvider>
