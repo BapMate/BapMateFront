@@ -9,6 +9,8 @@ import Main from './pages/main';
 import Signup from './pages/signup';
 import CalenderTest from './pages/calendertest';
 import UploadPostPage from './pages/uploadpost';
+import MeetUpHome from './pages/meetUpHome';
+import MeetingPage from './pages/meetingPage';
 
 function App() {
   const queryClient = new QueryClient();
@@ -23,6 +25,8 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/calendertest" element={<CalenderTest />} />
             <Route path="/meetup" element={<UploadPostPage />} />
+            <Route path="/home" element={<MeetUpHome />} />
+            <Route path="/meetinglist" element={<MeetingPage />} />
           </Routes>
         </BrowserRouter>
       </QueryClientProvider>

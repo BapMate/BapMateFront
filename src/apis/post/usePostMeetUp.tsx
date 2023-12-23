@@ -1,6 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import React from 'react';
 import axiosInstance from '..';
+import { useNavigate } from 'react-router-dom';
 
 /**
  * 모임 생성하기
@@ -11,6 +12,8 @@ export const usePostMeetUp = () => {
   // Retrieve access token from localStorage
   const token = localStorage.getItem('accessToken');
   console.log(token);
+  const navigate = useNavigate();
+
   interface PostMeetUpData {
     name: string;
     introduce: string;
@@ -36,6 +39,9 @@ export const usePostMeetUp = () => {
         // Add other options as needed (e.g., data for POST requests)
       });
       return response.data;
+    },
+    onSuccess: () => {
+      navigate('/home');
     },
   });
 

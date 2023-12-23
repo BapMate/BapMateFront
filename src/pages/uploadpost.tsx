@@ -12,12 +12,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 const UploadPostPage = () => {
   const [startDate, setStartDate] = useState<any>(new Date());
-  const MoodData: string[] = [
-    '#조용한식사',
-    '#ENFP모임',
-    '#푸드파이터',
-    '#소식클럽',
-  ];
+  const MoodData: string[] = ['#조용한식사', '#극E', '#맛집탐방', '#자기계발'];
   const [selectedMood, setSelectedMood] = useState<string>('');
   const [selectedRegionMood, setSelectedRegionMood] = useState<string>('');
   const inputRef = useRef<HTMLInputElement>(null);
