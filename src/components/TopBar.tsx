@@ -13,7 +13,11 @@ const TopBar: FC<TopBarProps> = ({ submit }) => {
   const { pathname } = useLocation();
 
   const goBack = () => {
-    navigate(-1);
+    if (pathname === '/signup/favor/1') {
+      navigate('/home');
+    } else {
+      navigate(-1);
+    }
   };
 
   console.log(pathname);
@@ -22,6 +26,7 @@ const TopBar: FC<TopBarProps> = ({ submit }) => {
 
   if (pathname === '/postdetail') titleText = '모임 상세';
   else if (pathname === '/meetup') titleText = '새 모임 등록';
+  else if (pathname === '/signup/favor') titleText = '';
 
   return (
     <TopBarWrapper>
@@ -30,6 +35,16 @@ const TopBar: FC<TopBarProps> = ({ submit }) => {
       )}
       {pathname === '/mypage/editprofile' && (
         <img onClick={goBack} src={back} alt="Go Back" />
+      )}
+      {pathname === '/signup/favor/1' && (
+        <img onClick={goBack} src={back} alt="Go Back" />
+      )}
+      {pathname === '/signup/favor/2' && (
+        <img
+          onClick={() => navigate('/signup/favor/1')}
+          src={back}
+          alt="Go Back"
+        />
       )}
       {pathname === '/meetup' && (
         <UploadWrapper>
@@ -52,13 +67,14 @@ const TopBarWrapper = styled.div`
   height: 56px;
   justify-content: center;
   align-items: center;
-  border-bottom: 1px solid var(--light-gray, #eceaea);
+  // border-bottom: 1px solid var(--light-gray, #eceaea);
   background: var(--white, #fbfbfb);
   padding-left: 30px;
   padding-right: 30px;
   img {
     position: absolute;
-    left: 10px;
+    left: 15px;
+    top: 40px;
   }
 `;
 

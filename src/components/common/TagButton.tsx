@@ -35,6 +35,6 @@ const TagWrapper = styled.button<{ btncolor: string }>`
   color: ${(props) => props.btncolor};
   background-color: transparent;
 
-  margin-right: 10px;
-  margin-bottom: 10px;
+  margin-right: 8px;
+  margin-bottom: 8px;
 `;

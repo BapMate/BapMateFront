@@ -11,6 +11,7 @@ import CalenderTest from './pages/calendertest';
 import UploadPostPage from './pages/uploadpost';
 import MeetUpHome from './pages/meetUpHome';
 import MeetingPage from './pages/meetingPage';
+import SignupFavor from './pages/favorPage';
 
 function App() {
   const queryClient = new QueryClient();
@@ -27,6 +28,7 @@ function App() {
             <Route path="/meetup" element={<UploadPostPage />} />
             <Route path="/home" element={<MeetUpHome />} />
             <Route path="/meetinglist" element={<MeetingPage />} />
+            <Route path="/signup/favor/:number" element={<SignupFavor />} />
           </Routes>
         </BrowserRouter>
       </QueryClientProvider>
