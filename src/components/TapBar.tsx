@@ -32,7 +32,7 @@ export default TapBar;
 
 const Wrapper = styled.div`
   display: flex;
-  width: 290px;
+  width: 100vw;
   padding: 20px 50px;
   justify-content: space-between;
   align-items: flex-start;

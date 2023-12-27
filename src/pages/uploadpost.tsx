@@ -314,7 +314,7 @@ const TagWrapper = styled.div`
 const InputBox = styled.input`
   border-radius: 40px;
   border: 1px solid var(--light-gray, #eceaea);
-  width: 295px;
+  width: 100%;
   height: 30px;
   padding: 17px 24px;
 
@@ -329,7 +329,7 @@ const InputBox = styled.input`
 const InputBoxLarge = styled.textarea`
   border-radius: 40px;
   border: 1px solid var(--light-gray, #eceaea);
-  width: 295px;
+  width: 100%;
   height: 100px;
   padding: 17px 24px;
   resize: none;
@@ -379,7 +379,7 @@ const Title = styled.div`
 const SDatePicker = styled(DatePicker)`
   border-radius: 40px;
   border: 1px solid var(--light-gray, #eceaea);
-  width: 295px;
+  width: 100%;
   height: 30px;
   padding: 17px 24px;
 
