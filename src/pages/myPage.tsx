@@ -38,7 +38,6 @@ const MyPage = () => {
           <img src={bowl} />
           <span>1단계 초보밥메</span>
         </Level>
-        <img src={line} />
         <Count>
           <span id="cnt">38</span>
           <span>그릇</span>
@@ -90,18 +89,19 @@ const MyPage = () => {
 export default MyPage;
 
 const Wrapper = styled.div`
-  width: 390px;
-  height: 844px;
+  width: 100vw;
+  height: 100vh;
   background: var(--white, #fbfbfb);
   margin: auto;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
   gap: 24px;
 `;
 
 const Profile = styled.div`
-  margin-top: 100px;
+  margin-top: 30px;
   width: 350px;
   display: flex;
   flex-direction: column;
@@ -208,7 +208,7 @@ const Count = styled.div`
 const CntBar = styled.div`
   #bar {
     position: absolute;
-    width: 290px;
+    width: 80%;
     height: 4px;
     align-self: stretch;
     border-radius: 4px;
@@ -216,7 +216,7 @@ const CntBar = styled.div`
   }
   #current {
     position: absolute;
-    width: 235px;
+    width: 30%;
     height: 4px;
     border-radius: 4px;
     background: var(--key, #fd505b);

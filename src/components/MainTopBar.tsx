@@ -20,8 +20,8 @@ export default MainTopBar;
 
 const Wrapper = styled.div`
   display: inline-flex;
-  width: 350px;
-  height: 56px;
+  width: 100vw;
+  height: 70px;
   padding: 0px 20px;
   margin-bottom: 10px;
   align-items: center;

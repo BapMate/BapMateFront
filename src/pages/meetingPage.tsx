@@ -74,7 +74,7 @@ const MeetingPage = () => {
 export default MeetingPage;
 
 const Wrapper = styled.div`
-  width: 390px;
+  width: 100vw;
   height: 844px;
   background: var(--white, #fbfbfb);
   margin: auto;
