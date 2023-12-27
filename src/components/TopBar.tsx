@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { styled } from 'styled-components';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import back from '../assets/Back.svg';
 
@@ -10,6 +10,7 @@ interface TopBarProps {
 
 const TopBar: FC<TopBarProps> = ({ submit }) => {
   const navigate = useNavigate();
+  const { meetUpId } = useParams();
   const { pathname } = useLocation();
 
   const goBack = () => {
@@ -20,6 +21,7 @@ const TopBar: FC<TopBarProps> = ({ submit }) => {
     }
   };
 
+  console.log(meetUpId);
   console.log(pathname);
 
   let titleText = '';
@@ -45,6 +47,9 @@ const TopBar: FC<TopBarProps> = ({ submit }) => {
           src={back}
           alt="Go Back"
         />
+      )}
+      {pathname === `/meetup/${meetUpId}` && (
+        <img onClick={goBack} src={back} alt="Go Back" />
       )}
       {pathname === '/meetup' && (
         <UploadWrapper>

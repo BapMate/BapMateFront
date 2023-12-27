@@ -6,6 +6,7 @@ import TopBar from '../components/TopBar';
 import { useNavigate } from 'react-router-dom';
 import { usePostHobbies } from '../apis/post/usePostHobbies';
 import { usePostUserEating } from '../apis/post/usePostUserEating';
+import { usePostPesonal } from '../apis/post/usePostPersonality';
 
 const SignupFavor = () => {
   const [page, setPage] = useState(1);
@@ -72,7 +73,7 @@ const SignupFavor = () => {
 
   const { hobbyInfo, isSuccess, error, data } = usePostHobbies();
   const { eatingInfo, isEatingSuccess } = usePostUserEating();
-  const { personalityInfo } = usePostPersonality();
+  const { personalityInfo } = usePostPesonal();
 
   useEffect(() => {
     setPage(pageParam);
@@ -152,7 +153,7 @@ const SignupFavor = () => {
 
   const handlePersonalitySubmit = async () => {
     try {
-      await personalityInfo({ personalityData });
+      await personalityInfo(personalityData);
     } catch (error) {
       // 에러 처리
       console.error('An error occurred:', error);

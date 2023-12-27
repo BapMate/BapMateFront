@@ -4,7 +4,7 @@ import axiosInstance from '..';
 import { useNavigate } from 'react-router';
 
 /**
- * 식사량,속도 키워드 받기
+ * 성격 키워드 받기
  * @param
  * @returns
  */
@@ -31,7 +31,7 @@ interface PersonalityInfoData {
   good_under_pressure: number;
 }
 
-export const usePostPesonality = () => {
+export const usePostPesonal = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem('accessToken');
   const {
@@ -43,13 +43,17 @@ export const usePostPesonality = () => {
   } = useMutation({
     mutationKey: ['personalityInfo'],
     mutationFn: async (postData: PersonalityInfoData) => {
-      const res = await axiosInstance.post(`/v1/auth/userEating`, postData, {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-          'Access-Control-Allow-Origin': '*',
+      const res = await axiosInstance.post(
+        `/v1/auth/userPersonality`,
+        postData,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+            'Access-Control-Allow-Origin': '*',
+          },
         },
-      });
+      );
       return res.data;
     },
     onSuccess: () => {

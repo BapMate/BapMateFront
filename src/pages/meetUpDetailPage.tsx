@@ -11,29 +11,8 @@ import CTABtn from '../components/CTABtn';
 import CTAdelBtn from '../components/CTAdelBtn';
 import { useGetMeetUpDetail } from '../apis/get/useGetMeetUpDetail';
 import { formatDateString } from '../components/FormatDateString';
-
-interface PeopleProps {
-  writerId: string;
-}
-
-interface PostDetailPageProps {
-  id: number;
-  name: string;
-  introduce: string;
-  chatRoomLink: string;
-  region: string;
-  date: string;
-  restaurant: string;
-  numberOfPeople: number;
-  currentNumberOfPeople: number;
-  meetUpAtmosphere: string;
-  regionAtmosphere: string;
-  representationImage: string;
-}
-
-// const People: React.FC<PeopleProps> = ({ writerId }) => (
-//   <PeopleWrapper>test</PeopleWrapper>
-// );
+import { usePostParticipate } from '../apis/post/usePostParticipate';
+import axios from 'axios';
 
 const MeetUpDetail = () => {
   const navigate = useNavigate();
@@ -47,9 +26,9 @@ const MeetUpDetail = () => {
   const formattedDate = formatDateString(meetUpDetail?.data?.date || '');
   console.log(meetUpDetail?.data?.date);
   console.log(formattedDate);
-  const handleCTABtnClick = () => {
-    setShowCTAdelBtn(true);
-  };
+
+  const { participate, participateError, isParticipateSuccess } =
+    usePostParticipate();
 
   const goBack = () => {
     navigate(-1);
@@ -62,6 +41,35 @@ const MeetUpDetail = () => {
   if (error) {
     return <p>Error: {error.message}</p>;
   }
+  const token = localStorage.getItem('accessToken');
+
+  const handleCTABtnClick = async () => {
+    try {
+      // usePostParticipate 훅을 통해 모임에 참여하는 로직
+      // 데이터를 가져오거나 에러 처리 등을 수행할 수 있음
+      const response = await axios.post(
+        `/v1/meetUp/participate/${meetUpId}`,
+        null,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+            'Access-Control-Allow-Origin': '*',
+          },
+          params: {
+            meetUpId: meetUpId,
+          },
+        },
+      );
+
+      // Axios automatically throws an error for non-2xx responses,
+      // so you can handle success here directly
+      setShowCTAdelBtn(true);
+    } catch (error) {
+      // 에러 처리
+      console.error('An error occurred:', error);
+    }
+  };
 
   return (
     <Wrapper className="PostDetailPage">
