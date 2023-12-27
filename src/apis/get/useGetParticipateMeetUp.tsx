@@ -7,13 +7,17 @@ import axiosInstance from '..';
  * @param
  * @returns meetUp data
  */
-export const useGetHostingMeetup = () => {
+export const useGetParticipateMeetUp = () => {
   const token = localStorage.getItem('accessToken');
 
-  const { isLoading, data, error } = useQuery({
-    queryKey: ['hostingMeetup'],
+  const {
+    isLoading: isLoadingParticipate,
+    data,
+    error: errorParticipate,
+  } = useQuery({
+    queryKey: ['participatedMeetup'],
     queryFn: async () => {
-      const res = await axiosInstance.get(`/v1/meetUp/host`, {
+      const res = await axiosInstance.get(`/v1/meetUp/participate`, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`,
@@ -25,8 +29,8 @@ export const useGetHostingMeetup = () => {
   });
 
   return {
-    hostingMeetup: data || null,
-    isLoading,
-    error,
+    participatedMeetup: data || null,
+    isLoadingParticipate,
+    errorParticipate,
   };
 };
