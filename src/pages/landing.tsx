@@ -11,39 +11,26 @@ const Landing = () => {
 
   return (
     <Wrapper>
-      <InnerWrapper>
-        <Logo />
-        <CommonButton
-          onClick={moveToKakaoLogin}
-          color="kakao"
-          textColor="black"
-          text="카카오로그인"
-        />
-      </InnerWrapper>
+      <Logo />
+      <CommonButton
+        onClick={moveToKakaoLogin}
+        color="kakao"
+        textColor="black"
+        text="카카오로그인"
+      />
     </Wrapper>
   );
 };
-
-const InnerWrapper = styled.div`
-  width: 100%;
-  height: 60%;
-
-  padding-top: 15rem;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-`;
-
 const Wrapper = styled.div`
   width: 100vw;
   height: 100vh;
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: space-between;
+  padding-top: 10rem;
+  padding-bottom: 5rem;
 `;
 
 export default Landing;
