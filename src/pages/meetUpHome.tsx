@@ -44,8 +44,8 @@ const MeetUpHome = () => {
 export default MeetUpHome;
 
 const Wrapper = styled.div`
-  width: 390px;
-  height: 844px;
+  width: 100vw;
+  height: 100vh;
   background: var(--white, #fbfbfb);
   margin: auto;
 `;

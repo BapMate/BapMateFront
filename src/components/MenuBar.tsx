@@ -75,10 +75,8 @@ const MenuBar: React.FC<MenuBarProps> = () => {
 export default MenuBar;
 
 const Wrapper = styled.div`
-  position: absolute;
-  top: 754px;
   display: flex;
-  width: 350px;
+  width: 100vw;
   height: 90px;
   padding: 0px 20px 0px 20px;
   justify-content: space-between;

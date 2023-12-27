@@ -63,14 +63,14 @@ const TopBarWrapper = styled.div`
   position: relative;
   display: flex;
   flex-direction: row;
-  width: 330px;
-  height: 56px;
+  width: 100vw;
+  height: 70px;
   justify-content: center;
   align-items: center;
   // border-bottom: 1px solid var(--light-gray, #eceaea);
   background: var(--white, #fbfbfb);
-  padding-left: 30px;
-  padding-right: 30px;
+  margin-left: 30px;
+  margin-right: 30px;
   img {
     position: absolute;
     left: 15px;
@@ -85,6 +85,9 @@ const Title = styled.div`
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
+
+  display: flex;
+  align-items: center;
 `;
 
 const TextNegative = styled.div`
@@ -108,8 +111,8 @@ const UploadWrapper = styled.div`
   top: 0;
   display: flex;
   flex-direction: row;
-  width: 330px;
-  height: 56px;
+  width: 100vw;
+  height: 70px;
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid var(--light-gray, #eceaea);

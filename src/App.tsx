@@ -7,16 +7,18 @@ import KakaoLogin from './pages/kakaoLogin';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import Main from './pages/main';
 import Signup from './pages/signup';
-import CalenderTest from './pages/calendertest';
 import UploadPostPage from './pages/uploadpost';
 import MeetUpHome from './pages/meetUpHome';
 import MeetingPage from './pages/meetingPage';
 import SignupFavor from './pages/favorPage';
+import MyPage from './pages/myPage';
+import GlobalStyle from './style/GlobalStyle';
 
 function App() {
   const queryClient = new QueryClient();
   return (
     <ThemeProvider theme={theme}>
+      <GlobalStyle />
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <Routes>
@@ -24,11 +26,11 @@ function App() {
             <Route path="/kakao/redirect" element={<KakaoLogin />} />
             <Route path="/main" element={<Main />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/calendertest" element={<CalenderTest />} />
             <Route path="/meetup" element={<UploadPostPage />} />
             <Route path="/home" element={<MeetUpHome />} />
             <Route path="/meetinglist" element={<MeetingPage />} />
             <Route path="/signup/favor/:number" element={<SignupFavor />} />
+            <Route path="/myPage" element={<MyPage />} />
           </Routes>
         </BrowserRouter>
       </QueryClientProvider>
