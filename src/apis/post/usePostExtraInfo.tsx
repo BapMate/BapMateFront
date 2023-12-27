@@ -7,6 +7,11 @@ import axiosInstance from '..';
  * @param
  * @returns
  */
+
+interface ExtraInfoData {
+  name: string;
+  universityName: string;
+}
 export const usePostExtraInfo = () => {
   const {
     mutate,
@@ -16,11 +21,8 @@ export const usePostExtraInfo = () => {
     isSuccess,
   } = useMutation({
     mutationKey: ['extraInfo'],
-    mutationFn: async (data) => {
-      const res = await axiosInstance.post(`/v1/info`, {
-        name: '이한비',
-        universityName: '홍익대학교',
-      });
+    mutationFn: async (data: ExtraInfoData) => {
+      const res = await axiosInstance.post(`/v1/info`, data);
       return res.data;
     },
   });

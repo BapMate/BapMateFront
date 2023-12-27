@@ -5,9 +5,16 @@ import TagButton from '../common/TagButton';
 interface CertModalData {
   isOpen: boolean;
   onClose: () => void;
+  univCertCode: number;
+  setUnivCertCode: (value: number) => void;
 }
 
-const CertModal = ({ isOpen, onClose }: CertModalData) => {
+const CertModal = ({
+  isOpen,
+  onClose,
+  univCertCode,
+  setUnivCertCode,
+}: CertModalData) => {
   if (!isOpen) return null;
 
   return (
@@ -22,7 +29,12 @@ const CertModal = ({ isOpen, onClose }: CertModalData) => {
 
         <CertWrapper>
           <h2>인증번호 입력</h2>
-          <InputBox placeholder="인증번호를 입력해주세요" />
+          <InputBox
+            placeholder="인증번호를 입력해주세요"
+            onChange={(e) => {
+              setUnivCertCode(Number(e.currentTarget.value));
+            }}
+          />
           <SmallBut onClick={onClose}>확인</SmallBut>
         </CertWrapper>
       </DialogBox>

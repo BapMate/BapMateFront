@@ -53,7 +53,7 @@ const SignupFavor = () => {
     '나만아는곳',
   ];
   const FavorData = ['민초', '고수', '마라', '하와이안피자', '오이'];
-  const HotData = ['1', '2', '3', '4', '5'];
+  const NumData = ['1', '2', '3', '4', '5'];
 
   const handleTagClick = (data: string) => {
     setSelectedMoods((prevSelectedMoods: string[]) => {
@@ -121,7 +121,7 @@ const SignupFavor = () => {
           <SubTitle>주변 사람의 평가를 참고하면 도움이 돼요</SubTitle>
           <Text>식사량</Text>
           <TagWrapper>
-            {HotData.map((data, index) => (
+            {NumData.map((data, index) => (
               <TagButton
                 key={index}
                 text={data}
@@ -133,7 +133,7 @@ const SignupFavor = () => {
 
           <Text>식사 속도</Text>
           <TagWrapper>
-            {FavorData.map((data, index) => (
+            {NumData.map((data, index) => (
               <TagButton
                 key={index}
                 text={data}

@@ -23,7 +23,7 @@ export const usePostUnivCert = () => {
   } = useMutation({
     mutationKey: ['univCert'],
     mutationFn: async (data: UnivCertData) => {
-      const res = await axiosInstance.post(`/v1/univCert`, data);
+      const res = await axiosInstance.post(`/v1/univcert`, data);
       return res.data;
     },
   });

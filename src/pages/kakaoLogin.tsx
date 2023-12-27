@@ -45,10 +45,18 @@ const KakaoLogin = () => {
     if (fetchAccessData.isSuccess) {
       const isRegistered = fetchAccessData.data.data.isRegistered;
 
+      console.log(fetchAccessData.data.data.accessToken);
+      console.log(fetchAccessData.data.data.refreshToken);
       if (isRegistered) {
         //회원가입된 사용자
-        setAccessToken(fetchAccessData.data.data.accessToken);
-        setRefreshToken(fetchAccessData.data.data.refreshToken);
+        localStorage.setItem(
+          'accessToken',
+          fetchAccessData.data.data.accessToken,
+        );
+        localStorage.setItem(
+          'refreshToken',
+          fetchAccessData.data.data.refreshToken,
+        );
         navigate('/');
       } else {
         //회원가입 안된 사용자
@@ -61,21 +69,32 @@ const KakaoLogin = () => {
   useEffect(() => {
     if (fetchSignUpData.isSuccess) {
       //idToken으로 회원가입 성공
-      setAccessToken(fetchSignUpData.data.data.accessToken);
-      setRefreshToken(fetchSignUpData.data.data.refreshToken);
-
+      console.log(fetchSignUpData.data.data.accessToken);
+      console.log(fetchSignUpData.data.data.refreshToken);
+      localStorage.setItem(
+        'accessToken',
+        fetchSignUpData.data.data.accessToken,
+      );
+      localStorage.setItem(
+        'refreshToken',
+        fetchSignUpData.data.data.refreshToken,
+      );
       alert('회원가입이 필요해요!');
       navigate('/signup');
     }
   }, [fetchSignUpData.isSuccess]);
 
-  useEffect(() => {
-    if (accessToken !== '' && refreshToken !== '') {
-      //로컬스토리지 저장
-      localStorage.setItem('accessToken', accessToken);
-      localStorage.setItem('refreshToken', refreshToken);
-    }
-  }, [accessToken, refreshToken]);
+  // useEffect(() => {
+  //   console.log(accessToken);
+  //   console.log(refreshToken);
+  //   if (accessToken !== '') {
+  //     //로컬스토리지 저장
+  //     localStorage.setItem('accessToken', accessToken);
+  //     localStorage.setItem('refreshToken', refreshToken);
+  //   } else {
+  //     console.log('accessToke,refreshToken저장 실패');
+  //   }
+  // }, [accessToken, refreshToken]);
 
   return <div>Loading...</div>;
 };
