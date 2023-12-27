@@ -18,6 +18,12 @@ const KakaoLogin = () => {
   const fetchData = useGetIdToken(code);
   const fetchAccessData = usePostIdToken(idToken);
 
+  // useEffect를 사용하여 쿼리 매개변수를 업데이트
+  useEffect(() => {
+    setCode(searchParams.get('code'));
+    console.log(code);
+  }, [searchParams]);
+
   useEffect(() => {
     if (fetchData.idToken !== null) {
       setIdToken(fetchData.idToken.data.idToken);

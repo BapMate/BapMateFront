@@ -17,11 +17,14 @@ const BackHeader = ({ text = '' }: HeaderProps) => {
 
 const Wrapper = styled.div`
   width: 100vw;
+  height: 70px;
 
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+
+  padding-left: 1rem;
 `;
 
 const Text = styled.div`
