@@ -5,17 +5,74 @@ import TagButton from '../components/common/TagButton';
 import TopBar from '../components/TopBar';
 import { useNavigate } from 'react-router-dom';
 import { usePostHobbies } from '../apis/post/usePostHobbies';
+import { usePostUserEating } from '../apis/post/usePostUserEating';
 
 const SignupFavor = () => {
   const [page, setPage] = useState(1);
   const [selectedMood, setSelectedMood] = useState('');
   const [selectedMoods, setSelectedMoods] = useState<string[]>([]); // Assuming that the tags are strings
+  const [selectPace, setSelectPace] = useState<string>('');
+  const [selectAmount, setSelectAmount] = useState<string>('');
+  const [personalityData, setPersonalityData] = useState({
+    humorous: 0,
+    lively: 0,
+    talkative: 0,
+    high_energy: 0,
+    constructive: 0,
+    self_improving: 0,
+    passionate: 0,
+    ambitious: 0,
+    empathetic: 0,
+    sensible: 0,
+    approachable: 0,
+    good_listener: 0,
+    shy: 0,
+    reserved: 0,
+    quiet: 0,
+    timid: 0,
+    spontaneous: 0,
+    adventurous: 0,
+    creative: 0,
+    good_under_pressure: 0,
+  });
+
+  const PersonalityData = [
+    'humorous',
+    'lively',
+    'talkative',
+    'high_energy',
+    'constructive',
+    'self_improving',
+    'passionate',
+    'ambitious',
+    'empathetic',
+    'sensible',
+    'approachable',
+    'good_listener',
+    'shy',
+    'reserved',
+    'quiet',
+    'timid',
+    'spontaneous',
+    'adventurous',
+    'creative',
+    'good_under_pressure',
+  ] as const;
+
+  const handlePersonality = (selectedPersonality: any) => {
+    setPersonalityData((prevData: any) => ({
+      ...prevData,
+      [selectedPersonality]: prevData[selectedPersonality] === 0 ? 1 : 0,
+    }));
+  };
 
   const navigate = useNavigate();
   const pathnameParts = location.pathname.split('/');
   const pageParam = parseInt(pathnameParts[pathnameParts.length - 1], 10);
 
   const { hobbyInfo, isSuccess, error, data } = usePostHobbies();
+  const { eatingInfo, isEatingSuccess } = usePostUserEating();
+  const { personalityInfo } = usePostPersonality();
 
   useEffect(() => {
     setPage(pageParam);
@@ -53,7 +110,8 @@ const SignupFavor = () => {
     '나만아는곳',
   ];
   const FavorData = ['민초', '고수', '마라', '하와이안피자', '오이'];
-  const NumData = ['1', '2', '3', '4', '5'];
+  const PaceData = ['1', '2', '3', '4', '5'];
+  const NumData = ['적게 먹어요', '적당히 먹어요', '많이 먹어요'];
 
   const handleTagClick = (data: string) => {
     setSelectedMoods((prevSelectedMoods: string[]) => {
@@ -66,13 +124,60 @@ const SignupFavor = () => {
     console.log(selectedMoods.length);
   };
 
-  const handleHobbies = () => {
-    hobbyInfo({ strings: selectedMoods });
-    if (isSuccess) {
-      navigate('/signup/favor/2');
-      setPage(2);
+  const handleHobbies = async () => {
+    try {
+      // hobbyInfo 함수가 비동기적으로 동작하는 것을 가정
+      await hobbyInfo({ strings: selectedMoods });
+
+      if (isSuccess) {
+        setPage(2);
+      }
+    } catch (error) {
+      // 에러 처리
+      console.error('An error occurred:', error);
     }
   };
+
+  const handleEatingAmountPace = async () => {
+    try {
+      await eatingInfo({ amount: selectAmount, pace: selectPace });
+      if (isEatingSuccess) {
+        setPage(3);
+      }
+    } catch (error) {
+      // 에러 처리
+      console.error('An error occurred:', error);
+    }
+  };
+
+  const handlePersonalitySubmit = async () => {
+    try {
+      await personalityInfo({ personalityData });
+    } catch (error) {
+      // 에러 처리
+      console.error('An error occurred:', error);
+    }
+  };
+
+  function handleEatingAmount(data: any): void {
+    if (data == '적게 먹어요') {
+      setSelectAmount('SMALL');
+    } else if (data == '많이 먹어요') {
+      setSelectAmount('LARGE');
+    } else {
+      setSelectAmount('MEDIUM');
+    }
+  }
+
+  function handleEatingPace(data: string): void {
+    if (data == '1' || data == '2') {
+      setSelectPace('SLOW');
+    } else if (data == '4' || data == '5') {
+      setSelectPace('FAST');
+    } else {
+      setSelectPace('MODERATE');
+    }
+  }
 
   return (
     <Wrapper>
@@ -125,30 +230,68 @@ const SignupFavor = () => {
               <TagButton
                 key={index}
                 text={data}
-                type={selectedMood === data ? 'default' : 'disabled'}
-                onClick={() => setSelectedMood(data)}
+                type={selectAmount === data ? 'default' : 'disabled'}
+                onClick={() => handleEatingAmount(data)}
               />
             ))}
           </TagWrapper>
 
           <Text>식사 속도</Text>
           <TagWrapper>
-            {NumData.map((data, index) => (
+            {PaceData.map((data, index) => (
               <TagButton
                 key={index}
                 text={data}
-                type={selectedMood === data ? 'default' : 'disabled'}
-                onClick={() => setSelectedMood(data)}
+                type={selectPace === data ? 'default' : 'disabled'}
+                onClick={() => handleEatingPace(data)}
               />
             ))}
           </TagWrapper>
 
           <CTABtn
             onClick={(e: any) => {
+              handleEatingAmountPace();
+            }}
+            text="다음으로"
+          />
+
+          {/* <CTABtn
+            onClick={(e: any) => {
               navigate('/home');
             }}
             text="회원가입 완료"
+          /> */}
+        </>
+      )}
+      {page === 3 && (
+        <>
+          <Title>자세한 취향을 알려주세여</Title>
+          <SubTitle>더 정확한 모임 추천을 받을 수 있어요</SubTitle>
+          <Text>성격</Text>
+          <TagWrapper>
+            {PersonalityData.map((data, index) => (
+              <TagButton
+                key={index}
+                text={data}
+                type={personalityData[data] === 1 ? 'default' : 'disabled'}
+                onClick={() => handlePersonality(data)}
+              />
+            ))}
+          </TagWrapper>
+
+          <CTABtn
+            onClick={(e: any) => {
+              handlePersonalitySubmit();
+            }}
+            text="다음으로"
           />
+
+          {/* <CTABtn
+            onClick={(e: any) => {
+              navigate('/home');
+            }}
+            text="회원가입 완료"
+          /> */}
         </>
       )}
     </Wrapper>
@@ -215,3 +358,6 @@ const SmallText = styled.div`
   margin-left: 20px;
   margin-top: 20px;
 `;
+function usePostPersonality(): { personalityInfo: any } {
+  throw new Error('Function not implemented.');
+}

@@ -4,15 +4,16 @@ import axiosInstance from '..';
 import { useNavigate } from 'react-router';
 
 /**
- * 취미 키워드 받기
+ * 식사량,속도 키워드 받기
  * @param
  * @returns
  */
-interface HobbyInfoData {
-  strings: string[];
+interface EatingInfoData {
+  amount: string;
+  pace: string;
 }
 
-export const usePostHobbies = () => {
+export const usePostUserEating = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem('accessToken');
   const {
@@ -20,11 +21,11 @@ export const usePostHobbies = () => {
     data = [],
     isPending,
     error,
-    isSuccess,
+    isSuccess: isEatingSuccess,
   } = useMutation({
-    mutationKey: ['hobbyInfo'],
-    mutationFn: async (postData: HobbyInfoData) => {
-      const res = await axiosInstance.post(`/v1/auth/userHobby`, postData, {
+    mutationKey: ['eatingInfo'],
+    mutationFn: async (postData: EatingInfoData) => {
+      const res = await axiosInstance.post(`/v1/auth/userEating`, postData, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
@@ -34,14 +35,14 @@ export const usePostHobbies = () => {
       return res.data;
     },
     onSuccess: () => {
-      navigate('/signup/favor/2');
+      navigate('/signup/favor/3');
     },
   });
 
   return {
-    hobbyInfo: mutate,
+    eatingInfo: mutate,
     isPending,
-    isSuccess,
+    isEatingSuccess,
     error,
     data,
   };
