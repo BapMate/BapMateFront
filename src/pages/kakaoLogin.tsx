@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSearchParams } from 'react-router-dom';
 import { useGetIdToken } from '../apis/get/useGetIdToken';
 import { usePostIdToken } from '../apis/post/usePostIdToken';
+import { usePostSignup } from '../apis/post/usePostSignup';
 
 const KakaoLogin = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -16,14 +17,15 @@ const KakaoLogin = () => {
   const [refreshToken, setRefreshToken] = useState('');
 
   const fetchData = useGetIdToken(code);
+  const fetchSignUpData = usePostSignup(idToken);
   const fetchAccessData = usePostIdToken(idToken);
 
-  // useEffect를 사용하여 쿼리 매개변수를 업데이트
+  //code받기
   useEffect(() => {
     setCode(searchParams.get('code'));
-    console.log(code);
   }, [searchParams]);
 
+  //idToken저장
   useEffect(() => {
     if (fetchData.idToken !== null) {
       setIdToken(fetchData.idToken.data.idToken);
@@ -31,34 +33,47 @@ const KakaoLogin = () => {
     }
   }, [fetchData]);
 
+  //로그인 요청
   useEffect(() => {
     if (idToken !== '') {
       fetchAccessData.accessToken();
     }
   }, [idToken]);
 
+  //로그인 처리
   useEffect(() => {
     if (fetchAccessData.isSuccess) {
       const isRegistered = fetchAccessData.data.data.isRegistered;
+
       if (isRegistered) {
         //회원가입된 사용자
         setAccessToken(fetchAccessData.data.data.accessToken);
         setRefreshToken(fetchAccessData.data.data.refreshToken);
+        navigate('/');
       } else {
         //회원가입 안된 사용자
-        alert('회원가입이 필요해요!');
-        navigate('/signup');
+        fetchSignUpData.signup();
       }
     }
   }, [fetchAccessData.isSuccess]);
+
+  //회원가입 처리
+  useEffect(() => {
+    if (fetchSignUpData.isSuccess) {
+      //idToken으로 회원가입 성공
+      setAccessToken(fetchSignUpData.data.data.accessToken);
+      setRefreshToken(fetchSignUpData.data.data.refreshToken);
+
+      alert('회원가입이 필요해요!');
+      navigate('/signup');
+    }
+  }, [fetchSignUpData.isSuccess]);
 
   useEffect(() => {
     if (accessToken !== '' && refreshToken !== '') {
       //로컬스토리지 저장
       localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('refreshToken', refreshToken);
-      alert('로그인 성공!');
-      navigate('/main');
     }
   }, [accessToken, refreshToken]);
 

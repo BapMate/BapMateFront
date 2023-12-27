@@ -5,15 +5,32 @@ import { useSearchParams } from 'react-router-dom';
 import CommonButton from '../components/common/button';
 import BackHeader from '../components/common/backHeader';
 import UnivInfo from '../components/signup/UnivInfo';
+import CertModal from '../components/signup/CertModal';
+import { usePostUnivCert } from '../apis/post/usePostUnivCert';
 
 const Signup = () => {
   const navigate = useNavigate();
   const [name, setName] = useState('');
   const [univName, setUnivName] = useState('');
   const [univEmail, setUnivEmail] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  //custom-hook
+  const fetchData = usePostUnivCert();
 
   const moveToNext = () => {
-    alert('다음!');
+    setIsModalOpen(true);
+    fetchData.univCert({ univEmail: univEmail, univName: univName });
+    console.log(fetchData);
+  };
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    navigate('favor');
   };
 
   return (
@@ -33,6 +50,9 @@ const Signup = () => {
         textColor="white"
         text="다음으로"
       />
+      {isModalOpen && (
+        <CertModal isOpen={isModalOpen} onClose={closeModal}></CertModal>
+      )}
     </Wrapper>
   );
 };
