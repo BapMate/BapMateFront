@@ -9,7 +9,7 @@ const Main = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchData.extraInfo();
+    fetchData.extraInfo({ name: '이한비', universityName: '홍익대학교' });
     if (fetchData.isSuccess) {
       console.log(fetchData.data);
       navigate('/home');

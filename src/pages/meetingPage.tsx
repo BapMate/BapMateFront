@@ -6,7 +6,6 @@ import MenuBar from '../components/MenuBar';
 import TapBar from '../components/TapBar';
 import { useGetHostingMeetup } from '../apis/get/useGetHostingMeetup';
 import { useGetParticipateMeetUp } from '../apis/get/useGetParticipateMeetUp';
-import { Container } from '@material-ui/core';
 
 const MeetingPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

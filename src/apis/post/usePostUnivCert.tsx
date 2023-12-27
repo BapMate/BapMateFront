@@ -3,16 +3,17 @@ import React from 'react';
 import axiosInstance from '..';
 
 /**
- * 추가정보 받기
+ * 학교인증 코드 받기
  * @param
  * @returns
  */
 
-interface ExtraInfoData {
-  name: string;
-  universityName: string;
+interface UnivCertData {
+  univName: string;
+  univEmail: string;
 }
-export const usePostExtraInfo = () => {
+
+export const usePostUnivCert = () => {
   const {
     mutate,
     data = '',
@@ -20,15 +21,15 @@ export const usePostExtraInfo = () => {
     error,
     isSuccess,
   } = useMutation({
-    mutationKey: ['extraInfo'],
-    mutationFn: async (data: ExtraInfoData) => {
-      const res = await axiosInstance.post(`/v1/info`, data);
+    mutationKey: ['univCert'],
+    mutationFn: async (data: UnivCertData) => {
+      const res = await axiosInstance.post(`/v1/univcert`, data);
       return res.data;
     },
   });
 
   return {
-    extraInfo: mutate,
+    univCert: mutate,
     isPending,
     isSuccess,
     error,
