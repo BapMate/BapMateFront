@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, UseMutationOptions } from '@tanstack/react-query';
 import React from 'react';
 import axiosInstance from '..';
 import { useNavigate, useParams } from 'react-router';
@@ -9,24 +9,16 @@ import { useNavigate, useParams } from 'react-router';
  * @param meetUpId - 가져올 모임의 ID
  * @returns meetUpDetail data
  */
-export const usePostParticipate = () => {
-  const token = localStorage.getItem('accessToken');
-  const { meetUpId } = useParams();
-
-  const {
-    mutate,
-    data,
-    error: participateError,
-    isSuccess: isParticipateSuccess,
-  } = useMutation({
-    mutationKey: ['participate'],
-    mutationFn: async () => {
-      const res = await axiosInstance.post(
+const usePostParticipate = (meetUpId: string) => {
+  const mutation = useMutation({
+    mutationFn: async (meetUpId: string) => {
+      const response = await axiosInstance.post(
         `/v1/meetUp/participate/${meetUpId}`,
+        null,
         {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
             'Access-Control-Allow-Origin': '*',
           },
           params: {
@@ -34,13 +26,11 @@ export const usePostParticipate = () => {
           },
         },
       );
-      return res.data;
+      return response.data;
     },
   });
 
-  return {
-    participate: mutate,
-    participateError,
-    isParticipateSuccess,
-  };
+  return mutation;
 };
+
+export default usePostParticipate;

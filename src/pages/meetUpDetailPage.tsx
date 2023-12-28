@@ -11,7 +11,7 @@ import CTABtn from '../components/CTABtn';
 import CTAdelBtn from '../components/CTAdelBtn';
 import { useGetMeetUpDetail } from '../apis/get/useGetMeetUpDetail';
 import { formatDateString } from '../components/FormatDateString';
-import { usePostParticipate } from '../apis/post/usePostParticipate';
+import usePostParticipate from '../apis/post/usePostParticipate';
 import axios from 'axios';
 
 const MeetUpDetail = () => {
@@ -27,8 +27,7 @@ const MeetUpDetail = () => {
   console.log(meetUpDetail?.data?.date);
   console.log(formattedDate);
 
-  const { participate, participateError, isParticipateSuccess } =
-    usePostParticipate();
+  const mutation = usePostParticipate(meetUpId || '');
 
   const goBack = () => {
     navigate(-1);
@@ -47,20 +46,23 @@ const MeetUpDetail = () => {
     try {
       // usePostParticipate 훅을 통해 모임에 참여하는 로직
       // 데이터를 가져오거나 에러 처리 등을 수행할 수 있음
-      const response = await axios.post(
-        `/v1/meetUp/participate/${meetUpId}`,
-        null,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-            'Access-Control-Allow-Origin': '*',
-          },
-          params: {
-            meetUpId: meetUpId,
-          },
-        },
-      );
+      //   const response = await axios.post(
+      //     `/v1/meetUp/participate/${meetUpId}`,
+      //     null,
+      //     {
+      //       headers: {
+      //         'Content-Type': 'application/json',
+      //         Authorization: `Bearer ${token}`,
+      //         'Access-Control-Allow-Origin': '*',
+      //       },
+      //       params: {
+      //         meetUpId: meetUpId,
+      //       },
+      //     },
+      //   );
+      if (meetUpId) {
+        await mutation.mutateAsync(meetUpId);
+      }
 
       // Axios automatically throws an error for non-2xx responses,
       // so you can handle success here directly
