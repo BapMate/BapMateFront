@@ -11,6 +11,7 @@ import UploadPostPage from './pages/uploadpost';
 import MeetUpHome from './pages/meetUpHome';
 import MeetingPage from './pages/meetingPage';
 import SignupFavor from './pages/favorPage';
+import MeetUpDetail from './pages/meetUpDetailPage';
 import MyPage from './pages/myPage';
 import GlobalStyle from './style/GlobalStyle';
 
@@ -30,6 +31,7 @@ function App() {
             <Route path="/home" element={<MeetUpHome />} />
             <Route path="/meetinglist" element={<MeetingPage />} />
             <Route path="/signup/favor/:number" element={<SignupFavor />} />
+            <Route path="/meetup/:meetUpId" element={<MeetUpDetail />}></Route>
             <Route path="/myPage" element={<MyPage />} />
           </Routes>
         </BrowserRouter>

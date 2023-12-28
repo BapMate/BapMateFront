@@ -5,6 +5,7 @@ import MenuBar from '../components/MenuBar';
 import Post from '../components/Post';
 import MainTopBar from '../components/MainTopBar';
 import { useGetHostingMeetup } from '../apis/get/useGetHostingMeetup';
+import { useGetRecommendedMeetUps } from '../apis/get/useGetRecommendedMeetUps';
 
 const MeetUpHome = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -17,11 +18,10 @@ const MeetUpHome = () => {
     setIsModalOpen(false);
   };
 
-  const { hostingMeetup, isLoading, error } = useGetHostingMeetup();
-  console.log(hostingMeetup);
+  const { recommendedMeetUps, isLoading, error } = useGetRecommendedMeetUps();
 
-  const posts = hostingMeetup?.data;
-  console.log(posts);
+  const posts = recommendedMeetUps?.meetUpList;
+  console.log(recommendedMeetUps);
 
   return (
     <Wrapper className="PostPage">

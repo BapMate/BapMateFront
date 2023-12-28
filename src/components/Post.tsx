@@ -5,13 +5,18 @@ import { useNavigate } from 'react-router-dom';
 import divBar from '../assets/divBar.svg';
 import mapPin from '../assets/mapPin.svg';
 import Tag from './Tag';
+import { formatDateString } from './FormatDateString';
 
 const Post = (props: any) => {
   const navigate = useNavigate();
 
   const moveDetail = () => {
-    navigate('/postdetail');
+    const meetUpId = props.id.toString();
+    console.log('hi', meetUpId);
+    navigate(`/meetup/${meetUpId}`);
   };
+
+  const formattedDate = formatDateString(props?.date || '');
 
   return (
     <Wrapper onClick={moveDetail}>
@@ -28,7 +33,7 @@ const Post = (props: any) => {
             </span>
           </People>
           <Detail>
-            <span id="time">{props.date}</span>
+            <span id="time">{formattedDate}</span>
             <Place>
               <img src={mapPin} />
               <span id="place">{props.region}</span>

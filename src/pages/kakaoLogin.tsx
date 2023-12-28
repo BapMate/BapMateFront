@@ -57,7 +57,7 @@ const KakaoLogin = () => {
           'refreshToken',
           fetchAccessData.data.data.refreshToken,
         );
-        navigate('/');
+        navigate('/home');
       } else {
         //회원가입 안된 사용자
         fetchSignUpData.signup();
