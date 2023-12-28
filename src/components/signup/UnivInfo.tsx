@@ -20,7 +20,7 @@ const UnivInfo = ({
 }: UnivInfoData) => {
   return (
     <Wrapper>
-      <h1>회원정보 입력</h1>
+      <Title>회원정보 입력</Title>
 
       <SubTitle>학교 이메일 인증</SubTitle>
 
@@ -47,9 +47,21 @@ const UnivInfo = ({
   );
 };
 
+const Title = styled.div`
+  color: var(--black, #292525);
+  text-overflow: ellipsis;
+  font-family: Pretendard;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+`;
+
 const Wrapper = styled.div`
   width: 100%;
-  height: 100%;
+  height: 90%;
 
   display: flex;
   flex-direction: column;

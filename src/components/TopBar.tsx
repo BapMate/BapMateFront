@@ -69,7 +69,7 @@ const TopBarWrapper = styled.div`
   align-items: center;
   // border-bottom: 1px solid var(--light-gray, #eceaea);
   background: var(--white, #fbfbfb);
-  margin-left: 30px;
+  margin-left: 10px;
   margin-right: 30px;
   img {
     position: absolute;

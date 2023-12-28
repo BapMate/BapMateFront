@@ -8,6 +8,9 @@ const GlobalStyle = createGlobalStyle`
     *{
         box-sizing:border-box;
     }
+    body{
+        background: var(--white, #fbfbfb);
+    }
 `;
 
 export default GlobalStyle;

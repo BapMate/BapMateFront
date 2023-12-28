@@ -158,10 +158,14 @@ const SignupFavor = () => {
 export default SignupFavor;
 
 const Wrapper = styled.div`
-  width: 390px;
-  height: 844px;
+  width: 100vw;
+  height: 100vh;
   background: var(--white, #fbfbfb);
-  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-left: 1rem;
 `;
 
 const Title = styled.div`
@@ -189,7 +193,7 @@ const SubTitle = styled.div`
 
 const TagWrapper = styled.div`
   padding-left: 20px;
-  width: 300px;
+  width: 80vw;
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
