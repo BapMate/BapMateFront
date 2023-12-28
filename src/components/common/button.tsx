@@ -22,8 +22,8 @@ const CommonButton = ({
     <div>
       {isFull && (
         <FullButWrapper
-          buttonColor={color}
-          textColor={textColor}
+          buttoncolor={color}
+          textcolor={textColor}
           onClick={onClick}
         >
           {text}
@@ -35,8 +35,8 @@ const CommonButton = ({
 };
 
 const FullButWrapper = styled.button<{
-  buttonColor: string;
-  textColor: string;
+  buttoncolor: string;
+  textcolor: string;
 }>`
   width: 21.875rem;
   height: 3rem;
@@ -50,8 +50,8 @@ const FullButWrapper = styled.button<{
   font-size: 1.125rem;
   font-weight: 700;
 
-  color: ${(props) => props.theme.colors[props.textColor]};
-  background-color: ${(props) => props.theme.colors[props.buttonColor]};
+  color: ${(props) => props.theme.colors[props.textcolor]};
+  background-color: ${(props) => props.theme.colors[props.buttoncolor]};
   border: none;
 
   cursor: pointer;
